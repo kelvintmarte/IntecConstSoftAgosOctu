@@ -1,0 +1,289 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="INTEC_AGU_OCT22Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="ClientType">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="128" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Description" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="Enabled" Type="Boolean" Nullable="false" />
+    <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+    <NavigationProperty Name="People" Relationship="Self.FK_People_ClientType" FromRole="ClientType" ToRole="People" />
+  </EntityType>
+  <EntityType Name="Company">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="128" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Boss" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="PrimaryPhone" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="SecondaryPhone" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="Fax" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="EmailAddress" Type="String" MaxLength="254" FixedLength="false" Unicode="false" />
+    <Property Name="WebSite" Type="String" MaxLength="2083" FixedLength="false" Unicode="false" />
+    <Property Name="Enabled" Type="Boolean" Nullable="false" />
+    <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+    <NavigationProperty Name="People" Relationship="Self.FK_People_Company" FromRole="Company" ToRole="People" />
+  </EntityType>
+  <EntityType Name="ContactType">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="128" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Description" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="Enabled" Type="Boolean" Nullable="false" />
+    <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+    <NavigationProperty Name="People" Relationship="Self.FK_People_ContactType" FromRole="ContactType" ToRole="People" />
+  </EntityType>
+  <EntityType Name="Deparment">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Code" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="Name" Type="String" MaxLength="128" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Description" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="Enabled" Type="Boolean" Nullable="false" />
+    <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+    <NavigationProperty Name="People" Relationship="Self.FK_People_Deparment" FromRole="Deparment" ToRole="People" />
+  </EntityType>
+  <EntityType Name="People">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="String" MaxLength="450" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="FirstName" Type="String" MaxLength="35" FixedLength="false" Unicode="false" />
+    <Property Name="MiddleName" Type="String" MaxLength="35" FixedLength="false" Unicode="false" />
+    <Property Name="LastName" Type="String" MaxLength="70" FixedLength="false" Unicode="false" />
+    <Property Name="ClientTypeId" Type="Int32" />
+    <Property Name="ContactTypeId" Type="Int32" />
+    <Property Name="SupportStaff" Type="Boolean" Nullable="false" />
+    <Property Name="PhoneNumber" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="EmailAddress" Type="String" MaxLength="254" FixedLength="false" Unicode="false" />
+    <Property Name="CompanyId" Type="Int32" />
+    <Property Name="DepartmentId" Type="Int32" />
+    <Property Name="Enabled" Type="Boolean" Nullable="false" />
+    <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+    <NavigationProperty Name="ClientType" Relationship="Self.FK_People_ClientType" FromRole="People" ToRole="ClientType" />
+    <NavigationProperty Name="Company" Relationship="Self.FK_People_Company" FromRole="People" ToRole="Company" />
+    <NavigationProperty Name="ContactType" Relationship="Self.FK_People_ContactType" FromRole="People" ToRole="ContactType" />
+    <NavigationProperty Name="Deparment" Relationship="Self.FK_People_Deparment" FromRole="People" ToRole="Deparment" />
+    <NavigationProperty Name="User" Relationship="Self.FK_User_People" FromRole="People" ToRole="User" />
+  </EntityType>
+  <EntityType Name="Permission">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="128" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Description" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="Enabled" Type="Boolean" Nullable="false" />
+    <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+    <NavigationProperty Name="UserPermission" Relationship="Self.FK_UserPermission_Permission" FromRole="Permission" ToRole="UserPermission" />
+  </EntityType>
+  <EntityType Name="Restriction">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="128" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Description" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="Enabled" Type="Boolean" Nullable="false" />
+    <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+    <NavigationProperty Name="UserRestriction" Relationship="Self.FK_UserRestriction_Restriction" FromRole="Restriction" ToRole="UserRestriction" />
+  </EntityType>
+  <EntityType Name="User">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="String" MaxLength="450" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Username" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="LicenseTypeId" Type="Int32" Nullable="false" />
+    <Property Name="PeopleId" Type="String" MaxLength="450" FixedLength="false" Unicode="true" />
+    <Property Name="Enabled" Type="Boolean" Nullable="false" />
+    <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+    <NavigationProperty Name="People" Relationship="Self.FK_User_People" FromRole="User" ToRole="People" />
+    <NavigationProperty Name="UserPermission" Relationship="Self.FK_UserPermission_User" FromRole="User" ToRole="UserPermission" />
+    <NavigationProperty Name="UserRestriction" Relationship="Self.FK_UserRestriction_User" FromRole="User" ToRole="UserRestriction" />
+  </EntityType>
+  <EntityType Name="UserPermission">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UserId" Type="String" MaxLength="450" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="PermissionId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Permission" Relationship="Self.FK_UserPermission_Permission" FromRole="UserPermission" ToRole="Permission" />
+    <NavigationProperty Name="User" Relationship="Self.FK_UserPermission_User" FromRole="UserPermission" ToRole="User" />
+  </EntityType>
+  <EntityType Name="UserRestriction">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UserId" Type="String" MaxLength="450" FixedLength="false" Unicode="true" />
+    <Property Name="RestrictionId" Type="Int32" />
+    <NavigationProperty Name="Restriction" Relationship="Self.FK_UserRestriction_Restriction" FromRole="UserRestriction" ToRole="Restriction" />
+    <NavigationProperty Name="User" Relationship="Self.FK_UserRestriction_User" FromRole="UserRestriction" ToRole="User" />
+  </EntityType>
+  <Association Name="FK_People_ClientType">
+    <End Role="ClientType" Type="Self.ClientType" Multiplicity="0..1" />
+    <End Role="People" Type="Self.People" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ClientType">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="People">
+        <PropertyRef Name="ClientTypeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_People_Company">
+    <End Role="Company" Type="Self.Company" Multiplicity="0..1" />
+    <End Role="People" Type="Self.People" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Company">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="People">
+        <PropertyRef Name="CompanyId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_People_ContactType">
+    <End Role="ContactType" Type="Self.ContactType" Multiplicity="0..1" />
+    <End Role="People" Type="Self.People" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ContactType">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="People">
+        <PropertyRef Name="ContactTypeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_People_Deparment">
+    <End Role="Deparment" Type="Self.Deparment" Multiplicity="0..1" />
+    <End Role="People" Type="Self.People" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Deparment">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="People">
+        <PropertyRef Name="DepartmentId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_User_People">
+    <End Role="People" Type="Self.People" Multiplicity="0..1" />
+    <End Role="User" Type="Self.User" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="People">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="User">
+        <PropertyRef Name="PeopleId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UserPermission_Permission">
+    <End Role="Permission" Type="Self.Permission" Multiplicity="1" />
+    <End Role="UserPermission" Type="Self.UserPermission" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Permission">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="UserPermission">
+        <PropertyRef Name="PermissionId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UserRestriction_Restriction">
+    <End Role="Restriction" Type="Self.Restriction" Multiplicity="0..1" />
+    <End Role="UserRestriction" Type="Self.UserRestriction" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Restriction">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="UserRestriction">
+        <PropertyRef Name="RestrictionId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UserPermission_User">
+    <End Role="User" Type="Self.User" Multiplicity="1" />
+    <End Role="UserPermission" Type="Self.UserPermission" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="UserPermission">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UserRestriction_User">
+    <End Role="User" Type="Self.User" Multiplicity="0..1" />
+    <End Role="UserRestriction" Type="Self.UserRestriction" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="UserRestriction">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="INTEC_AGU_OCT22Entities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="ClientType" EntityType="Self.ClientType" />
+    <EntitySet Name="Company" EntityType="Self.Company" />
+    <EntitySet Name="ContactType" EntityType="Self.ContactType" />
+    <EntitySet Name="Deparment" EntityType="Self.Deparment" />
+    <EntitySet Name="People" EntityType="Self.People" />
+    <EntitySet Name="Permission" EntityType="Self.Permission" />
+    <EntitySet Name="Restriction" EntityType="Self.Restriction" />
+    <EntitySet Name="User" EntityType="Self.User" />
+    <EntitySet Name="UserPermission" EntityType="Self.UserPermission" />
+    <EntitySet Name="UserRestriction" EntityType="Self.UserRestriction" />
+    <AssociationSet Name="FK_People_ClientType" Association="Self.FK_People_ClientType">
+      <End Role="ClientType" EntitySet="ClientType" />
+      <End Role="People" EntitySet="People" />
+    </AssociationSet>
+    <AssociationSet Name="FK_People_Company" Association="Self.FK_People_Company">
+      <End Role="Company" EntitySet="Company" />
+      <End Role="People" EntitySet="People" />
+    </AssociationSet>
+    <AssociationSet Name="FK_People_ContactType" Association="Self.FK_People_ContactType">
+      <End Role="ContactType" EntitySet="ContactType" />
+      <End Role="People" EntitySet="People" />
+    </AssociationSet>
+    <AssociationSet Name="FK_People_Deparment" Association="Self.FK_People_Deparment">
+      <End Role="Deparment" EntitySet="Deparment" />
+      <End Role="People" EntitySet="People" />
+    </AssociationSet>
+    <AssociationSet Name="FK_User_People" Association="Self.FK_User_People">
+      <End Role="People" EntitySet="People" />
+      <End Role="User" EntitySet="User" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UserPermission_Permission" Association="Self.FK_UserPermission_Permission">
+      <End Role="Permission" EntitySet="Permission" />
+      <End Role="UserPermission" EntitySet="UserPermission" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UserRestriction_Restriction" Association="Self.FK_UserRestriction_Restriction">
+      <End Role="Restriction" EntitySet="Restriction" />
+      <End Role="UserRestriction" EntitySet="UserRestriction" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UserPermission_User" Association="Self.FK_UserPermission_User">
+      <End Role="User" EntitySet="User" />
+      <End Role="UserPermission" EntitySet="UserPermission" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UserRestriction_User" Association="Self.FK_UserRestriction_User">
+      <End Role="User" EntitySet="User" />
+      <End Role="UserRestriction" EntitySet="UserRestriction" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
